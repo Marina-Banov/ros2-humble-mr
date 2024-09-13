@@ -1,0 +1,26 @@
+name: publish
+on: [push]
+
+jobs:
+  publish-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update latest Docker image tag
+        run: |
+          docker pull ghcr.io/marina-banov/ros2-humble-mr:latest || echo "No existing latest image found"
+          if docker image inspect ghcr.io/marina-banov/ros2-humble-mr:latest >/dev/null 2>&1; then
+            current_year=$(date +"%Y")
+            docker tag ghcr.io/marina-banov/ros2-humble-mr:latest ghcr.io/marina-banov/ros2-humble-mr:$current_year
+            docker push ghcr.io/marina-banov/ros2-humble-mr:$current_year
+          fi
+      - name: Build the new Docker image
+        run: |
+          docker build . --tag ghcr.io/marina-banov/ros2-humble-mr:latest
+          docker push ghcr.io/marina-banov/ros2-humble-mr:latest
