@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Instalacija ROS2 Humble
 # sudo apt install curl gnupg lsb-release
 # sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
@@ -8,9 +10,9 @@ sudo pip3 install transforms3d
 
 # Postavljanje radnog prostora
 mkdir -p ~/ros2_ws/src  # Ovdje ćete kreirati vlastite ROS pakete
-echo 'source /opt/ros/humble/setup.sh' >> ~/.bashrc
-echo 'source /usr/share/gazebo/setup.sh' >> ~/.bashrc
-echo 'source ~/ros2_ws/install/local_setup.sh' >> ~/.bashrc
-echo 'export ROS_DOMAIN_ID=30' >> ~/.bashrc
-echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc
-echo 'export GAZEBO_MODEL_PATH=/opt/ros/humble/share/turtlebot3_gazebo/models/' >> ~/.bashrc
+echo "source /opt/ros/humble/setup.sh" >> ~/.bashrc
+echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+echo "source ~/ros2_ws/install/local_setup.sh" >> ~/.bashrc
+echo "export ROS_DOMAIN_ID=30" >> ~/.bashrc
+echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=/opt/ros/humble/share/turtlebot3_gazebo/models/" >> ~/.bashrc
